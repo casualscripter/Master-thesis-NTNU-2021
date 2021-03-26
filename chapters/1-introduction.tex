@@ -1,6 +1,98 @@
 \chapter{Introduction}
+Stichpunkte
 
-Over the years, several thesis templates for \LaTeX{} have been developed by different groups at NTNU. Typically, there have been local templates for given study programmes, or different templates for the different study levels – bachelor, master, and \acrshort{phd}.\footnote{see, e.g., \url{https://github.com/COPCSE-NTNU/bachelor-thesis-NTNU} and \url{https://github.com/COPCSE-NTNU/master-theses-NTNU}}
+Problem
+\begin{itemize}
+\item zugriff auf system
+\item original nicht verändern
+\item forensisches image unveränderbar
+\item verschiedene plattformen = unterschiedliche probleme
+\item usability (Ermittler)
+\end{itemize}
+
+Warum?
+\begin{itemize}
+\item Hilfe für Ermittler
+\begin{itemize}
+  \item Ist der Datenträger hilfreich?
+  \item Konfrontation in der Vernehmung
+\end{itemize}
+\item Hilfe für Sachbearbeiter digitale Forensik
+\begin{itemize}
+  \item Worum geht es überhaupt?
+  \item strukturiertes Vorgehen
+\end{itemize}
+\item Hilfe für IT-Spezialist
+\begin{itemize}
+  \item Laufzeitanalyse
+\end{itemize}
+\end{itemize}
+
+Wichtig
+\begin{itemize}
+\item sparen von ressourcen (Zeit, Speicherplatz, ...)
+\item preview/triage
+\begin{itemize}
+  \item weniger zu bearbeitende Datenträger
+  \item konkreter Untersuchungsantrag
+\end{itemize}
+\item Arbeit parallelisieren
+\end{itemize}
+
+Was herausgefunden
+\begin{itemize}
+\item Marktanalyse
+\item Unterstütung von Mainstream (Windows 10)
+\item Eigene Lösung = Kombination von OS und Tools (Open Source)
+\item Mehr als nur die Summe der Einzelteile
+\item Mehr möglich (Netzwerk [largeer businesses with windows dc], Drucker, RAM-Capture, ...)
+\item erweiterbar
+\item BSD
+\item embedded systems
+\item IoT
+\end{itemize}
+
+Praktisch schon möglich
+\begin{itemize}
+\item Windows XP-10
+\item macOS X (+ 11)
+\item GNU/Linux
+\item Raspberry Pi (ARM)
+\end{itemize}
+
+\noindent Preparations: All critical parts of my solution has been assessed to support the principles of evidence integrity and chain of custody. My solution should be ready to use in the lab. (page 18)
+
+Observation, alert or notification -> hypothesis -> initiation process. (page 17)
+
+Scene of the incident (page 21); approprirate search warrant! (page 19)
+
+Preserve chain of custody and evidence integrity from the very start. Documentation, serial number of hdd/ssd, photos, geolocation, hash values (page 23), timestamp service, digital signatures, ... (page 22)
+
+Seize a computer with one ore more hdd/ssd from a suspect of a crime after doing live forensics if necessary. (page 17 and 22)
+
+At Lower Saxony the most common forensic image format is EWF\_E01.
+
+Logical images or single files are not relevant to this master thesis because virtualization needs a whole operating system!
+
+Collect digital raw data by copying the source secured by write blocking technology in a forensically sound manner. (page 16 and 23)
+
+In the second identification phase of the forensics process... if a digital object like a hdd or ssd is relevant to the investigation = digital evidence. (page 16)
+
+7WS: Who, what, where, when, with what, how and why.
+
+Examination (post mortem analysis) if relevant and give the  digital forensic expert a hint where to search deeper. (page 22)
+
+The digital forensic expert analysis the digital evidence.
+
+Virtualization could also be useful while presenting the case at the court.
+
+\noindent\rule{\textwidth}{1pt}
+
+% TODO
+% TODO: delete the text of the template!
+% TODO
+
+\noindent Over the years, several thesis templates for \LaTeX{} have been developed by different groups at NTNU. Typically, there have been local templates for given study programmes, or different templates for the different study levels – bachelor, master, and \acrshort{phd}.\footnote{see, e.g., \url{https://github.com/COPCSE-NTNU/bachelor-thesis-NTNU} and \url{https://github.com/COPCSE-NTNU/master-theses-NTNU}}
 
 Based on this experience, the \acrfull{CoPCSE}\footnote{\url{https://www.ntnu.no/wiki/display/copcse/Community+of+Practice+in+Computer+Science+Education+Home}} is hereby offering a template that should in principle be applicable for theses at all study levels. It is closely based on the standard \LaTeX{} \texttt{report} document class as well as previous thesis templates. Since the central regulations for thesis design have been relaxed – at least for some of the historical university colleges now part of NTNU – the template has been simlified and put closer to the default \LaTeX{} look and feel.
 
