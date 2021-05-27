@@ -26,16 +26,30 @@ for the police in Lower Saxony:\\
 \printglossary                    % Print glossary
 
 \input{chapters/1-introduction}
-\input{chapters/2-usage.tex}
-\input{chapters/3-structure.tex}
-\input{chapters/4-conclusion.tex}
+\input{chapters/2-requirements}
+\input{chapters/3-technical-design}
+\input{chapters/4-development-process}
+\input{chapters/5-implementation}
+\input{chapters/6-deployment}
+\input{chapters/7-testing}
+\input{chapters/8-discussion}
+\input{chapters/9-conclusion}
+\input{chapters/10-future-work}
+
+%\input{chapters/2-usage.tex}
+%\input{chapters/3-structure.tex}
+%\input{chapters/4-conclusion.tex}
 
 \chapter*{\bibname}
 \printbibliography[heading=none]
 
-\input{chapters/papers.tex}
+%\input{chapters/papers.tex}
 
 \appendix
-\input{appendices/a-appendix.tex}
+\input{appendices/scripts.tex}
+\input{appendices/hellonium.tex}
+
+\cleardoublepage
+\includepdf[pages=-]{appendices/NTNUProsjektavtale.pdf}
 
 \end{document}

@@ -1,0 +1,54 @@
+\chapter{Testing and user feedback}
+\label{chap:testing}
+
+During the development, the author collected and created various EWF\_E01 images.
+
+Following EWF\_EO1 images were used for the master thesis:
+
+\begin{itemize}
+    \item Windows 7 (BIOS/SATA/Singledisk/Singleboot/Plain)
+    \item Windows 7 (BIOS/SATA/RAID-0/Singleboot/Plain)
+    \item Windows 81u1 (UEFI/SATA/Singledisk/Singleboot/Plain)
+    \item Windows 10 after aniversary update! (UEFI/SATA/Singledisk/Singleboo//Plain)
+    \item Mac OS X 10.6.8
+    \item Mac OS X 10.7.5
+    \item OS X 10.8.5
+    \item OS X 10.9.5
+    \item OS X 10.10.1
+    \item OS X 10.11.5
+    \item macOS 10.12.6
+    \item macOS 10.13.6
+    \item macOS 10.14.1
+    \item Multiboot: macOS 10.14.1 + Windows 10 (18.03)
+    \item Debian 9 auf (nVidia driver only)
+    \item Win10 (15.11) + Ubuntu 16.04 (Nvme/Intel graphics driver only)
+    \item Linux Mint (Radeon driver only)
+\end{itemize}
+
+Hellonium started as a kind of competition between Microsoft Windows with Vmware Workstation and GNU/Linux with Qemu on the command line.
+
+Through this competition, more and more EWF\_E01 images could be successfully virtualised on both host platforms.
+
+The Microsoft Windows camp gradually realised the potential and increasingly motivated the GNU/Linux camp to work on their own distribution with their own GUI.
+
+Each new feature (Nautilus script) was developed against all the appropriate EWF\_E01 images until it worked as desired.
+
+It turned out that errors are often not visible in the GUI. Therefore, the possibility of executing the script from Nautilus as well as from the command line was included in the function library.
+
+\begin{lstlisting}[
+    caption={GUI or CLI},
+    label=lst:guiorcli,
+    language=bash]
+[...]
+if [ -n "${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}" ] ; then
+  # Remove the final "newline"!
+  readonly SOURCE="${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS%?}"
+else
+  readonly SOURCE="${1}"
+fi
+[...]
+\end{lstlisting}
+
+In the end, the workflows were gone through step by step for the four operating systems Microsoft Windows, macOS, GNU/Linux and Raspberry Pi OS in their entirety.
+
+In the author's opinion, however, a final test only makes sense once an individual, intelligent graphical user interface and a few of the more important, still missing features from the Future work chapter have been implemented.

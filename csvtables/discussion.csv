@@ -1,0 +1,33 @@
+Feature,FEX,Carbon,AIM,Hel(l)onium
+GUI,+,+,+,O
+Automatic decisions,+,+,+,--
+Verify EWF\_E01 image,+,--,--,+
+Verify digital signature,--,--,--,+
+Verify timestamp,--,--,--,+
+Image metadata,+,--,--,+
+Different filesystems,O\textsuperscript{1)},--,O\textsuperscript{13)},+
+Identify OS,O\textsuperscript{2)},O\textsuperscript{9)},-,+
+Mount EWF\_E01 writable,+,+,+,+
+Different controllers (NVMe),--\textsuperscript{3)},O\textsuperscript{10)},--,+
+Mount single partition,--\textsuperscript{14)},+,\textsuperscript{14)},+
+Bypass BSOD (Windows),+,+,+,+
+MBR -> BIOS (Windows),+,+,+,+
+GPT -> (U)EFI (Windows),+,+,+,+
+GPT -> BIOS (BOOTCAMP),--,--,+,+
+Emulate AppleSMC,+,--,--,+
+Network not connected,+,+,+,+
+Different CPU families,--\textsuperscript{4)},--,--,+
+Any numbers of CPU cores,--\textsuperscript{3)},+,+\textsuperscript{15)},+
+Get info about architecture,--,--,--,+
+Different CPU architectures,--,--,--,+
+Access of tty (GNU/Linux),+,--,+,+
+Get password hint,--,+\textsuperscript{11)},--,+
+Calculate password (macOS),--,--,--,+
+Dump hashes,--,+\textsuperscript{11)},--,+
+Password cracking,--,--,--,+
+Bypass login,O\textsuperscript{5)},--,O\textsuperscript{16)},--
+Clear password,--,+,--,+
+Boot Windows,O\textsuperscript{6)},O\textsuperscript{12)},+,+
+Boot macOS,O\textsuperscript{7)},--,--,+
+Boot GNU/Linux,--\textsuperscript{8)},--,O\textsuperscript{17)},+
+Boot RaspiOS,--,--,--,+

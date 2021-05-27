@@ -1,0 +1,132 @@
+\chapter{Future Work}
+\label{chap:future}
+
+\section{Missing requirements}
+\label{sec:missing}
+
+\subsection{Individual GUI}
+
+The user must interpret each output himself and decide which step is next.
+
+A large part of this should be taken over by a proper GUI.
+
+However, the user should still be able to intervene in case of misinterpretation.
+
+\subsection{Language}
+
+Because many employees in the Lower Saxony Police prefer programmes with a German user interface, the user interface should be translated into German to increase acceptance.
+
+\subsection{Manual}
+
+After implementing the individuel GUI a manual should be written to be able to deploy the distribution.
+
+\subsection{RAID}
+
+Because a single data carrier from a software- or hardware-based Redundant Arrays of Inexpensive Disks (RAID) can easily be misinterpreted as a damaged data area in the case of RAID0 or RAID5. \cite{Patterson1988}
+
+Hellonium has to be able to indicate the presence of a RAID.
+
+This offers the possibility to restore the entire RAID from all forensic images later.
+
+\begin{lstlisting}[
+    caption={raid reassemble example},
+    label=lst:raid,
+    language=bash]
+#!/usr/bin/env bash
+
+for nr in {1..3} ; do
+  mkdir "./disk${nr}/"
+  xmount --in ewf "./disk1${nr}.E"?? \
+         --out raw \
+         --cache "./disk${nr}.cache" \
+         "./disk${nr}/"
+  sudo losetup --find --partscan "./disk${nr}/disk${nr}.dd"
+done
+
+exit 0
+\end{lstlisting}
+
+\subsection{Disk spanning}
+
+A form of disk spanning frequently used on GNU/Linux servers is the Logical Volume Manager in version 2 (LVM2). Comparable to RAID, several hard disks are combined into one data carrier. Hellonium must be able to display Logical Volumes (LV), Volume Groups (VG) and Physical Volumes (PV) as part of an LVM2 data carrier.
+
+This later offers the possibility to recover the entire logical data carrier from the forensic images of individual physical data carriers.
+
+To avoid problems with its own logical volumes, the host itself should not use any.
+
+\subsection{Encryption}
+
+Encrypted media or partitions can easily be misinterpreted as corrupted data areas. Hellonium should, as far as possible, indicate encrypted media or partitions, as they must first be decrypted before the contents can be accessed.
+
+\subsection{XFS}
+
+[...]
+
+\subsection{ZFS}
+
+The zpool command configures ZFS storage pools. A storage pool is a collection of devices that provides physical storage and data replication for ZFS datasets.
+
+\begin{lstlisting}[
+    caption={zpool example},
+    label=lst:zpool,
+    language=bash]
+$ sudo zpool import
+\end{lstlisting}
+
+The zfs command configures ZFS datasets within a ZFS storage pool, as described in the manpage of zpool.
+
+\begin{lstlisting}[
+    caption={list zfs snapshots example},
+    label=lst:zfs-snapshot,
+    language=bash]
+$ sudo zfs list -t snapshot
+\end{lstlisting}
+
+\begin{lstlisting}[
+    caption={zfs mount example},
+    label=lst:zfs-mount,
+    language=bash]
+$ sudo mkdir /mnt/freenas-boot
+$ sudo mount --types zfs --options ro freenas-boot/ROOT/default /mnt/freenas-boot
+\end{lstlisting}
+
+\subsection{Windows registry hives}
+
+exchange or add regripper
+
+\begin{lstlisting}[
+    caption={regripper example},
+    label=lst:regripper,
+    language=bash]
+$ regripper -r SOFTWARE.hive -p winver
+\end{lstlisting}
+
+\subsection{Network configuration}
+
+macOS and GNU/Linux
+
+\subsection{RPi}
+
+Get virto running in GUI mode too.
+
+\subsection{GPU passthru}
+
+[...]
+
+\subsection{PDF network printer}
+
+[...]
+
+\subsection{other operating systems}
+
+FreeBSD (esp. FreeNAS and OPNsense), QNX, ...
+
+\subsection{iSCSI}
+
+[...]
+
+\subsection{Garbage collection}
+
+For RAID and LVM2 kpartx would be a good addition.
+
+But unraid, unlvm and unmount has to be reimplemented!

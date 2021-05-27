@@ -1,99 +1,103 @@
 \chapter{Introduction}
-Stichpunkte
 
-Problem
-\begin{itemize}
-\item zugriff auf system
-\item original nicht verändern
-\item forensisches image unveränderbar
-\item verschiedene plattformen = unterschiedliche probleme
-\item usability (Ermittler)
-\end{itemize}
+The experience of the last years has shown that the possibility to see a system under investigation through the eyes of the suspect can have many advantages in terms of investigation.
 
-Warum?
-\begin{itemize}
-\item Hilfe für Ermittler
-\begin{itemize}
-  \item Ist der Datenträger hilfreich?
-  \item Konfrontation in der Vernehmung
-\end{itemize}
-\item Hilfe für Sachbearbeiter digitale Forensik
-\begin{itemize}
-  \item Worum geht es überhaupt?
-  \item strukturiertes Vorgehen
-\end{itemize}
-\item Hilfe für IT-Spezialist
-\begin{itemize}
-  \item Laufzeitanalyse
-\end{itemize}
-\end{itemize}
+The author has developed a system based on open source that should enable all parties involved in the investigation process to safely virtualize a seized computer.
 
-Wichtig
-\begin{itemize}
-\item sparen von ressourcen (Zeit, Speicherplatz, ...)
-\item preview/triage
-\begin{itemize}
-  \item weniger zu bearbeitende Datenträger
-  \item konkreter Untersuchungsantrag
-\end{itemize}
-\item Arbeit parallelisieren
-\end{itemize}
+\section{Target groups}
 
-Was herausgefunden
-\begin{itemize}
-\item Marktanalyse
-\item Unterstütung von Mainstream (Windows 10)
-\item Eigene Lösung = Kombination von OS und Tools (Open Source)
-\item Mehr als nur die Summe der Einzelteile
-\item Mehr möglich (Netzwerk [largeer businesses with windows dc], Drucker, RAM-Capture, ...)
-\item erweiterbar
-\item BSD
-\item embedded systems
-\item IoT
-\end{itemize}
+The target groups for the system are cybercrime investigators, digital forensics experts, and IT specialists in the Lower Saxony Police.
 
-Praktisch schon möglich
-\begin{itemize}
-\item Windows XP-10
-\item macOS X (+ 11)
-\item GNU/Linux
-\item Raspberry Pi (ARM)
-\end{itemize}
+The cybercrime investigator is the first who knows about the case. Because he follows the case from start to finish, he knows it best. He plans all the individual steps. He is the contact person for the public prosecutor's office. He plans the searches and accompanies them as part of the identification phase of the digital forensics process. \cite{Aarnes2017:16} % page 16
+He is doing the police questioning of attestors and suspects. He obtains additional information from external parties. He makes forensic investigation requests to the digital forensic experts. He lets explain complicated things to him by IT specialists. He writes the final report, which is understandable for laymen.
 
-\noindent Preparations: All critical parts of my solution has been assessed to support the principles of evidence integrity and chain of custody. My solution should be ready to use in the lab. (page 18)
+The digital forensics expert often only gets to see the forensic investigation request and the evidence itself. At the crime scene, he is responsible for doing live forensics if needed and seizing the storage devices as part of the collection phase of the digital forensics process. He is collection digital raw data by copying the source secured by write blocking technology in a forensically sound manner. \cite{Aarnes2017:16} % page 16 (and 23)
+He preserves the chain of custody and evidence integrity among other things, through the documentation incl. serial numbers of storage devices, photos, geolocation, hash values, timestamp service and digital signatures from the very start. \cite{Aarnes2017:23} % page (16 and)  23
+At Lower Sacony the most common forensic image format is EWF\_E01.
+He writes a report that can be used in court about the presence or absence of relevant digital traces on the storage devices.
 
-Observation, alert or notification -> hypothesis -> initiation process. (page 17)
+The IT specialist explains complicated technical issues to the cybercrime investigator. If necessary, he explains to the cybercrime investigator the connections between the results of the forensic investigation and the case. He analyzes data, such as network traffic, mass data, software. He develops individual software solutions.
 
-Scene of the incident (page 21); approprirate search warrant! (page 19)
+\section{Problems}
 
-Preserve chain of custody and evidence integrity from the very start. Documentation, serial number of hdd/ssd, photos, geolocation, hash values (page 23), timestamp service, digital signatures, ... (page 22)
+A forensic image format is supposed to protect against changes. However, an installed operating system still wants to be able to write to the disk. The differences between real and virtualized hardware require different drivers. Some systems even require special hardware to boot. Some systems cannot be virtualized, but have to be emulated. Authentication has to be overcome. Some operating systems require an individual recipe.
 
-Seize a computer with one ore more hdd/ssd from a suspect of a crime after doing live forensics if necessary. (page 17 and 22)
+Not all target groups know about the problems. Not all target groups can identify the problems. Not all target groups know how to solve the problems. Not all target groups have the technical requirements. Not all target groups can solve the problems technically.
 
-At Lower Saxony the most common forensic image format is EWF\_E01.
+\section{Goal}
 
-Logical images or single files are not relevant to this master thesis because virtualization needs a whole operating system!
+% warum?
 
-Collect digital raw data by copying the source secured by write blocking technology in a forensically sound manner. (page 16 and 23)
+All target groups, regardless of their technical equipment and previous training, should be able to virtualize forensic images until they have successfully logged on to the system.
+A graphical user interface should support cybercrime investigators in particular.
+The cybercrime investigator is enabled to assist in the Examination phase. \cite{Aarnes2017:34} % page 34
+He could give the digital forensic expert a hint where to search deeper.
+The cybercrime investigator has to be able to verify hash values, digital signatures, and timestamps of a forensic image prior to examination or analysis phase of the digital forensics process.
+Virtualisation could also be usefull while in the presentation phase of the digital forensic process at the court as some kind of visualisation. \cite{Aarnes2017:46} % page 46
+In contrast to propretary solutions, the focus is not only on the mainstream (Microsoft Windows 10). Older Windows versions (XP, Vista, 7 and 8) are also to be taken into account. The virtualization of macOS guest systems under non-macOS host systems should also be supported. GNU/Linux, BSD and Unix should also be supported. Even embedded devices (e.g. QNX) and IoT (e.g. Contiki OS) should be supported.
+If a system or platform is not yet supported, it should be possible to extend the system easily.
 
-In the second identification phase of the forensics process... if a digital object like a hdd or ssd is relevant to the investigation = digital evidence. (page 16)
+\section{Outcome}
 
-7WS: Who, what, where, when, with what, how and why.
+% wichtig?
 
-Examination (post mortem analysis) if relevant and give the  digital forensic expert a hint where to search deeper. (page 22)
+The system enables cybercrime investigators to prioritize the storage devices to be examined for forensic evaluation as part of preview and triage.
+During the police questioning of a crime suspect, he can even be confronted with his own system without danger of data loss.
+It helps the digital forensics expert to better understand the case. The following better structured approach will save time.
+The IT specialist can gain additional data (eg network traffic, memory, ...) for the analysis through a running system.
+Since the system can be used by everyone independently and there are also no more unnecessary large amounts of data due to the export of virtual machines, everyone involved can work on a case in parallel.
 
-The digital forensic expert analysis the digital evidence.
+\section{Research question(s)}
 
-Virtualization could also be useful while presenting the case at the court.
+Main Research Question 1:\newline
+\noindent Is it possible to develop a system with existing open source software projects with which even a technically less experienced investigator can virtualise and enter a forensic image in a forensically sound manner?\newline
 
-\noindent\rule{\textwidth}{1pt}
+\noindent Research Question 2:\newline
+\noindent What are the disadvantages of such a product compared to proprietary solutions like Sumuri Carbon VFS, GetData Forensic Explorer or Arsenal Image Mounter?\newline
 
-% TODO
-% TODO: delete the text of the template!
-% TODO
+\noindent Research Question 3:\newline
+\noindent What are the advantages of such a product compared to proprietary solutions like Sumuri Carbon VFS, GetData Forensic Explorer or Arsenal Image Mounter?
 
-\noindent Over the years, several thesis templates for \LaTeX{} have been developed by different groups at NTNU. Typically, there have been local templates for given study programmes, or different templates for the different study levels – bachelor, master, and \acrshort{phd}.\footnote{see, e.g., \url{https://github.com/COPCSE-NTNU/bachelor-thesis-NTNU} and \url{https://github.com/COPCSE-NTNU/master-theses-NTNU}}
+\section{Construction of the master thesis}
 
-Based on this experience, the \acrfull{CoPCSE}\footnote{\url{https://www.ntnu.no/wiki/display/copcse/Community+of+Practice+in+Computer+Science+Education+Home}} is hereby offering a template that should in principle be applicable for theses at all study levels. It is closely based on the standard \LaTeX{} \texttt{report} document class as well as previous thesis templates. Since the central regulations for thesis design have been relaxed – at least for some of the historical university colleges now part of NTNU – the template has been simlified and put closer to the default \LaTeX{} look and feel.
+TODO
 
-The purpose of the present document is threefold. It should serve (i) as a description of the document class, (ii) as an example of how to use it, and (iii) as a thesis template.
+\subsection{Introduction}
+
+[...]
+
+\subsection{Requirements}
+
+[...]
+
+\subsection{Technical design}
+
+[...]
+
+\subsection{Development Process}
+
+[...]
+
+\subsection{Implementation}
+
+[...]
+
+\subsection{Deployment}
+
+[...]
+
+\subsection{Testing and user feedback}
+
+[...]
+
+\subsection{Discussion}
+
+[...]
+
+\subsection{Conclusion}
+
+[...]
+
+\subsection{Future work}
+
+[...]
