@@ -1,6 +1,68 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
 
-Die Research question(s) erscheinen mir nicht mehr passend.
+\section{Comparison}
 
-Vor einer Bewertung und einem Ergenbis sollten diese nochmal angepasst werden!
+\cref{tab:comparison} was mainly compiled during the compilation of requirements, during implementation and during testing.
+
+The table cannot be exhaustive!
+
+The results only refer to the available images. As the images are less representative of the mainstream and more focused on problems, the result is probably not representative.
+
+\begin{table}[htbp]
+  \centering
+  \caption[Comparison]{Comparison of different Products}
+  \label{tab:comparison}
+  \csvautobooktabular{csvtables/comparison.csv}
+\end{table}
+
+The following list is a supplement to the ratings in the table:
+
+\begin{enumerate}
+  \item APFS was not supported. Problems with ext4.
+  \item There was no support for GNU/Linux. Problems with Bootcamp (macOS).
+  \item The configuration of the VM has to be modified in Oracle VM VirtualBox GUI after creation.
+  \item The configuration of the VM has to be modified in Oracle VM VirtualBox per command line after creation.
+  \item GetData refers to PCUnlocker \cite{PCUnlocker}, which must be purchased separately.
+  \item Problems with Microsoft Windows 8, Bootcamp (macOS) and Dualboot (with Ubuntu).
+  \item Problems with some macOS images.
+  \item Problems with all GNU/Linux images.
+  \item Only Microsoft Windows is supported.
+  \item Only support for IDE, SCSI (default) and SATA.
+  \item Problems with Bootcamp.
+  \item APFS and ext4 was not supported.
+  \item If Microsoft Windows drivers are available.
+  \item The configuration of the VM has to be modified in HyperV after creation.
+  \item Problems with some Images.
+  \item Problems with some GNU/Linux images. Very slow on success.
+\end{enumerate}
+
+Even if the result suggests that the proprietary solutions performed poorly, it must be said at this point that they work good to very well for the mainstream.
+
+\section{Answers to the research question(s)}
+
+Main \textbf{Research Question 1}:\newline
+
+\noindent Yes if the investigator is only technically less experienced.
+
+Since the context menu of the file manager could be used, a very simple GUI is available.
+
+However, as soon as the investigator does not have the necessary basics in digital forensics, the author tends towards a no.
+
+There is a clear yes for the consistent use of open source projects and the consideration of the digital forensic process.\newline
+
+\noindent \textbf{Research Question 2}:\newline
+
+\noindent During the development and many rounds of testing it turned out that the context menu of the file manager is sufficient but not perfect.
+
+After starting a GUI, it should already gather and display most of the information in the image. The user should be able to correct individual values manually. Afterwards, the automatic process should be able to be started again from the verified value.
+
+This would make it even easier to use. In addition, even non-experts in digital forensics would be able to use the tool successfully.\newline
+
+\noindent \textbf{Research Question 3}:\newline
+
+\noindent Due to the transparency of the used open source projects and the customisation possibilities of the product, it was also able to successfully virtualise problem images. It can even emulate a different architecture.
+
+The transparency also makes it easier for an investigator to explain in court what the product does and how the result came about.
+
+Since the product was developed exclusively from freely available open source projects, another advantage is that the costs are much lower.

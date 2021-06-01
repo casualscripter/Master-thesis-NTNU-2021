@@ -1,32 +1,40 @@
 \chapter{Future Work}
 \label{chap:future}
 
+According to the author's current opinion, future work should deal with requirements that are already known and those that will arise in the future:
+
 \section{Missing requirements}
 \label{sec:missing}
 
 \subsection{Individual GUI}
 
-The user must interpret each output himself and decide which step is next.
+The user has to interpret each output himself and decide which step is next.
 
 A large part of this should be taken over by a proper GUI.
 
 However, the user should still be able to intervene in case of misinterpretation.
 
+\subsection{Persistence}
+
+A local SQLite database should replace the text files in a temporary directory. The information can be stored in a more structured way in the database. The contents should also be displayed in the GUI as early as possible.
+
 \subsection{Language}
 
-Because many employees in the Lower Saxony Police prefer programmes with a German user interface, the user interface should be translated into German to increase acceptance.
+Because many employees in the Lower Saxony Police prefer programs with a German user interface, the user interface should be translated into German to increase acceptance.
 
 \subsection{Manual}
 
-After implementing the individuel GUI a manual should be written to be able to deploy the distribution.
+After implementing the individual GUI a manual should be written to be able to deploy the distribution.
 
 \subsection{RAID}
 
-Because a single data carrier from a software- or hardware-based Redundant Arrays of Inexpensive Disks (RAID) can easily be misinterpreted as a damaged data area in the case of RAID0 or RAID5. \cite{Patterson1988}
+Because a single DASD from a software- or hardware-based Redundant Arrays of Inexpensive Disks (RAID) can easily be misinterpreted as a damaged data area in the case of RAID0 or RAID5. \cite{Patterson1988}
 
 Hellonium has to be able to indicate the presence of a RAID.
 
 This offers the possibility to restore the entire RAID from all forensic images later.
+
+A proof of concept code is given in \cref{lst:raid}.
 
 \begin{lstlisting}[
     caption={raid reassemble example},
@@ -48,7 +56,7 @@ exit 0
 
 \subsection{Disk spanning}
 
-A form of disk spanning frequently used on GNU/Linux servers is the Logical Volume Manager in version 2 (LVM2). Comparable to RAID, several hard disks are combined into one data carrier. Hellonium must be able to display Logical Volumes (LV), Volume Groups (VG) and Physical Volumes (PV) as part of an LVM2 data carrier.
+A form of disk spanning frequently used on GNU/Linux servers is the Logical Volume Manager in version 2 (LVM2). Comparable to RAID, several hard disks are combined into one data carrier. Hellonium has to be able to display Logical Volumes (LV), Volume Groups (VG) and Physical Volumes (PV) as part of an LVM2 data carrier.
 
 This later offers the possibility to recover the entire logical data carrier from the forensic images of individual physical data carriers.
 
@@ -60,11 +68,19 @@ Encrypted media or partitions can easily be misinterpreted as corrupted data are
 
 \subsection{XFS}
 
-[...]
+Since XFS is mainly used for data (databases, storage area for shared files, ...) and not for the system itself, it was not a big deal that TSK cannot (yet) interpret the file system.
+
+In case there should ever be a system in an XFS file system, a solution for XFS without TSK should be developed.
 
 \subsection{ZFS}
 
-The zpool command configures ZFS storage pools. A storage pool is a collection of devices that provides physical storage and data replication for ZFS datasets.
+Cases with a system installed in a ZFS file system are very rare.
+
+In the event that a FreeBSD, FreeNAS, OPNsense or similar needs to be virtualised, a solution for this should also be developed.
+
+The \textbf{zpool} command configures ZFS storage pools. A storage pool is a collection of devices that provides physical storage and data replication for ZFS datasets.
+
+A proof of concept code is given in \cref{lst:zpool}, \cref{lst:zfs-snapshot} and \cref{lst:zfs-mount}.
 
 \begin{lstlisting}[
     caption={zpool example},
@@ -73,7 +89,7 @@ The zpool command configures ZFS storage pools. A storage pool is a collection o
 $ sudo zpool import
 \end{lstlisting}
 
-The zfs command configures ZFS datasets within a ZFS storage pool, as described in the manpage of zpool.
+The \textbf{zfs} command configures ZFS datasets within a ZFS storage pool, as described in the manpage of zpool.
 
 \begin{lstlisting}[
     caption={list zfs snapshots example},
@@ -92,7 +108,11 @@ $ sudo mount --types zfs --options ro freenas-boot/ROOT/default /mnt/freenas-boo
 
 \subsection{Windows registry hives}
 
-exchange or add regripper
+FRED is a very useful tool with a graphical interface.
+
+However, since most of the scripts are command line based and FRED only takes into account the common information from the registry hives, perhaps it would be worth considering switching to regripper \cite{Regripper}?
+
+A proof of concept code is given in \cref{lst:regripper}
 
 \begin{lstlisting}[
     caption={regripper example},
@@ -103,30 +123,38 @@ $ regripper -r SOFTWARE.hive -p winver
 
 \subsection{Network configuration}
 
-macOS and GNU/Linux
+In order to be able to virtualise several systems in a virtual network in the future, the original network configuration has to be known so that all systems can find each other as before in reality.
+
+For Microsoft Windows, FRED and in the future perhaps regripper already provide us with the desired information. For Apple macOS and GNU/Linux, however, it still needs to be developed.
 
 \subsection{RPi}
 
-Get virto running in GUI mode too.
+Although several sources on the internet have claimed that Raspberry Pi OS can also be emulated with graphics under the machine virt, the author unfortunately did not succeed.
 
-\subsection{GPU passthru}
+In order to only have to maintain one script for Raspberry Pi OS and to be able to use a graphical interface with more memory, this problem should be solved.
 
-[...]
+\subsection{Anti malware}
+
+Because current malware is already able to recognise that it is running on a virtualised system and then behaves differently, it would be desirable if Qemu could be hidden from the malware.
+
+In this context, the possibility of GPU pass through should also be added.
 
 \subsection{PDF network printer}
 
-[...]
+In rare cases it has happened that a screenshot from a virtualised system was not sufficient. It can help here if documents can be printed out on the host via a PDF network printer.
 
 \subsection{other operating systems}
 
-FreeBSD (esp. FreeNAS and OPNsense), QNX, ...
+As soon as the need arises to virtualise a previously unsupported operating system (e.g. FreeBSD, FreeNAS, OPNsense, QNX, ...), a corresponding script should be developed.
 
 \subsection{iSCSI}
 
-[...]
+Actually, an easy-to-use system that works with overlay files (xmount) should make an export unnecessary.
+
+Should the need nevertheless arise, offering a bootable iSCSI target would be a useful addition to VNC and qemi-img.
 
 \subsection{Garbage collection}
 
-For RAID and LVM2 kpartx would be a good addition.
+With the support of rebuilding RAID and LVM2, it must also be possible to disassemble them cleanly.
 
-But unraid, unlvm and unmount has to be reimplemented!
+For this purpose, the umount script must be extended accordingly.

@@ -9,9 +9,9 @@ Due to the author's insufficient experience with BSD, it was not considered.
 
 The author has been able to gather extensive experience with GNU/Linux for over 20 years. On the server side he has favoured Debian GNU/Linux for years and on the client side he currently favours Arch Linux.
 
-Due to a major change in the Debian project regarding the creation of live systems for optical media, the process is currently somewhat easier under Arch Linux with the \glqq{}archiso\grqq{}\footnote{https://wiki.archlinux.de/title/Archiso} tool.
+Due to a major change in the Debian project regarding the creation of live systems for optical media, the process is currently somewhat easier under Arch Linux with the \glqq{}archiso\grqq{} \cite{Archiso} tool.
 
-Until the development is completed, an external SSD can be used with Arch Linux.
+Until the development is completed, an external SSD can be used with Arch Linux \cite{ArchLinux}.
 
 \section{Software}
 
@@ -19,7 +19,7 @@ Since Debian GNU/Linux is rather conservative in terms of package versions and o
 
 Basically all necessary tools are available as packages for Arch Linux.
 
-Should this not be the case, own recipes can be made available via the Arch Linux User Repository (AUR).
+Should this not be the case, own recipes can be made available via the Arch Linux User Repository (AUR) \cite{AUR}.
 
 Only in exceptional cases should internal software solutions be used. However, these must not be published via AUR as a matter of principle.
 
@@ -27,7 +27,7 @@ Only in exceptional cases should internal software solutions be used. However, t
 
 User-friendliness already begins with the graphical desktop. This should be preconfigured as well as possible for the intended use.
 
-Since an independent development of a GUI would have exceeded the time frame of the thesis, the possibility was chosen to supplement the file manager Nautilus from the Gnome project with scripts. In order not to have to fulfil any unnecessary dependencies and to ensure the most error-free integration of the file manager possible, the choice of the desktop interface fell on Gnome. The development took place under version 3. However, initial tests have not revealed any problems with version 4.
+Since an independent development of a GUI would have exceeded the time frame of the thesis, the possibility was chosen to supplement the file manager Nautilus from the Gnome project with scripts. In order not to have to fulfil any unnecessary dependencies and to ensure the most error-free integration of the file manager possible, the choice of the desktop interface fell on Gnome. The development took place under version 3. However, initial tests have not revealed any problems with version 4 \cite{Gnome}.
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -40,13 +40,13 @@ As can be seen in \cref{fig:NautilusScript} , after right-clicking on an EWF\_E0
 
 In the implementation phase, the goal is to find or package the right tools and make them easy to use via Nautilus script.
 
-As can be seen in \cref{fig:xmount}, the user can be asked for further details from a Nautilus script via Zenity\footnote{https://help.gnome.org/users/zenity/3.32/index.html}.
+As can be seen in \cref{fig:xmount}, the user can be asked for further details from a Nautilus script via Zenity \cite{Zenity}.
 
 Unfortunately, this workaround requires the user to interpret the output of each Nautilus script and then decide which script to run next.
 
 \section{Scripts}
 
-Nautilus scripts are like simple shell scripts, which is why shell scripting makes up most of the development.
+Nautilus scripts are like simple shell scripts, which is why shell scripting makes up most of the development. Shell scripting was an important part of the IMT4012-PHS module hosted by Prof. Dr. Fergus T. Toolan.
 
 If no suitable tool exist for individual requirements, it also has to be developed.
 

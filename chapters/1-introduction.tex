@@ -13,10 +13,10 @@ He is doing the police questioning of attestors and suspects. He obtains additio
 
 The digital forensics expert often only gets to see the forensic investigation request and the evidence itself. At the crime scene, he is responsible for doing live forensics if needed and seizing the storage devices as part of the collection phase of the digital forensics process. He is collection digital raw data by copying the source secured by write blocking technology in a forensically sound manner. \cite{Aarnes2017:16} % page 16 (and 23)
 He preserves the chain of custody and evidence integrity among other things, through the documentation incl. serial numbers of storage devices, photos, geolocation, hash values, timestamp service and digital signatures from the very start. \cite{Aarnes2017:23} % page (16 and)  23
-At Lower Sacony the most common forensic image format is EWF\_E01.
+At Lower Sacony the most common forensic image format is EWF\_E01 \cite{EWF}.
 He writes a report that can be used in court about the presence or absence of relevant digital traces on the storage devices.
 
-The IT specialist explains complicated technical issues to the cybercrime investigator. If necessary, he explains to the cybercrime investigator the connections between the results of the forensic investigation and the case. He analyzes data, such as network traffic, mass data, software. He develops individual software solutions.
+The IT specialist explains complicated technical issues to the cybercrime investigator. If necessary, he explains to the cybercrime investigator the connections between the results of the forensic investigation and the case. He analyzes data, such as network traffic, mass data and software. He develops individual software solutions.
 
 \section{Problems}
 
@@ -49,55 +49,58 @@ Since the system can be used by everyone independently and there are also no mor
 
 \section{Research question(s)}
 
-Main Research Question 1:\newline
+Main \textbf{Research Question 1}:\newline
+\newline
 \noindent Is it possible to develop a system with existing open source software projects with which even a technically less experienced investigator can virtualise and enter a forensic image in a forensically sound manner?\newline
-
-\noindent Research Question 2:\newline
+\newline
+\noindent \textbf{Research Question 2}:\newline
+\newline
 \noindent What are the disadvantages of such a product compared to proprietary solutions like Sumuri Carbon VFS, GetData Forensic Explorer or Arsenal Image Mounter?\newline
-
-\noindent Research Question 3:\newline
+\newline
+\noindent \textbf{Research Question 3}:\newline
+\newline
 \noindent What are the advantages of such a product compared to proprietary solutions like Sumuri Carbon VFS, GetData Forensic Explorer or Arsenal Image Mounter?
 
 \section{Construction of the master thesis}
 
-TODO
+This master thesis is a development project. It is structured as follows:
 
 \subsection{Introduction}
 
-[...]
+This chapter is a brief introduction to the topic. It deals with the prerequisites of the target groups. It describes the problem, the goal and the outcome. It concludes with the research questions.
 
 \subsection{Requirements}
 
-[...]
+This chapter contains the essential requirements that the author was able to gather during the implementation of seminars and the exchange with seminar participants as well as through years of experience in connection with the work of various software products on the subject of digital forensics and virtualisation.
 
 \subsection{Technical design}
 
-[...]
+This chapter contains the rough structure of the entire system. The main components are the operating system consisting of Linux kernel and open source software, a rudimentary graphical user interface, the self-developed scripts and last but not least a simple form of persistence.
 
 \subsection{Development Process}
 
-[...]
+This chapter contrasts theory of an effective development team with development by a single person in practice. In addition, the git repository is referenced here.
 
 \subsection{Implementation}
 
-[...]
+This chapter makes up the largest part of the master thesis. This chapter describes the technical implementation in detail.
 
 \subsection{Deployment}
 
-[...]
+This chapter is about deployment as it should be when the project is finally completed.
 
 \subsection{Testing and user feedback}
 
-[...]
+This chapter is about testing and user feedback without covid-19 pandemic in theory and with covid-19 pendamie in practice.
 
 \subsection{Discussion}
 
-[...]
+This chapter is about the positive and negative personal experiences that the author has gathered while writing this master thesis.
 
 \subsection{Conclusion}
 
-[...]
+This chapter compares the proprietery solutions with the product and answers the research questions.
 
 \subsection{Future work}
 
-[...]
+Because all possible requirements would have exceeded the scope of a master thesis in terms of time and content, the author decided to include Future Work as a separate chapter and not just as part of the Conclusion. This chapter contains all the requirements that are actually still missing for a comprehensive solution.

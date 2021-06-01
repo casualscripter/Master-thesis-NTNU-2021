@@ -1,7 +1,7 @@
 \chapter{Implementation}
 \label{chap:implementation}
 
-For the sake of better understanding, only the parts from a Nautilus script that are essential for solving the problem have been included in a listing. The complete script can be found in the Gitea\footnote{https://git.neumannsland.de/casualscripter/Masterthesis} repository.
+For the sake of better understanding, only the parts from a Nautilus script that are essential for solving the problem have been included in a listing. The complete script can be found in the Gitea repository.
 
 For better readability, the listings have been individualised by replacing the variables with concrete values.
 
@@ -29,7 +29,7 @@ It removes leading and trailing whitespace characters from a string.
 
 Assignments of binary locations automatically/manually to readonly vars for more flexibility or more security.
 
-An example is given in \cref{bin-assign}.
+An example is given in \cref{lst:bin-assign}.
 
 \begin{lstlisting}[
     caption={Examples of the assignment of binaries to variables},
@@ -67,7 +67,7 @@ In specific cases, however, the user needs some feedback.
 
 For this case, the functions error\_exit, hint and success have been implemented.
 
-They display messages to the user in zenity boxes.
+They display messages to the user in zenity message boxes.
 
 \subsection{check\_osr}
 
@@ -173,7 +173,7 @@ Asks the user to specify a partition of an image, eg. for mounting.
 
 \subsection{display\_resultfile}
 
-Displays the resultfile of a Nautilus script within a zenity box.
+Displays the resultfile of a Nautilus script within a zenity text box.
 
 \subsection{Running checks}
 
@@ -202,11 +202,11 @@ source "${LIBRARY}"
 
 \subsection{EWF\_E01}
 
-libewf\footnote{https://github.com/libyal/libewf} by Joachim Metz is a library to access the Expert Witness Compression Format (EWF).
+libewf \cite{Libewf} by Joachim Metz is a library to access the Expert Witness Compression Format (EWF).
 
-libewf has established itself in the open source environment as a quasi-standard for working with EWF\_E01 files under GNU/Linux.
-
-\textbf{ewfverify} is a utility to verify media data stored in EWF files. ewfverify is part ot the project.
+libewf has established itself in the open source environment as a quasi-standard for working with EWF\_E01 files under GNU/Linux.\newline
+\newline
+\noindent \textbf{ewfverify} is a utility to verify media data stored in EWF files. ewfverify is part ot the project.
 
 \begin{lstlisting}[
     caption={ewfverify example},
@@ -215,7 +215,7 @@ libewf has established itself in the open source environment as a quasi-standard
 $ ewfverify -d sha1 -l ./tmp/image.E01.txt ./image.E01
 \end{lstlisting}
 
-The script first checks if the source is an EWF\_E01 image and if the directory tmp is present.
+\noindent The script first checks if the source is an EWF\_E01 image and if the directory tmp is present.
 
 After that it executes ewfverify, writes the output into the log file and waits until it has finished.
 
@@ -236,7 +236,7 @@ If the hash values from the metadata are identical to those calculated over the 
 
 \textbf{signify} by Ted Unangst is a small tool for signing OpenBSD OS releases.
 
-It is an open source project\footnote{http://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/signify/signify.c} hosted by OpenBSD.
+It is an open source project \cite{SignifyCSV} hosted by OpenBSD.
 
 The signify utility creates and verifies cryptographic signatures. Not only OS releases.
 
@@ -247,11 +247,11 @@ The signify utility creates and verifies cryptographic signatures. Not only OS r
 $ signify -V -p ./signify-key.pub -m ./image.E01.log
 \end{lstlisting}
 
-If the investigator can read \glqq{}Signature Verified\grqq{}, he can be sure that the person with the publicly available key really created the image.
+\noindent If the investigator can read \glqq{}Signature Verified\grqq{}, he can be sure that the person with the publicly available key really created the image.\newline
+\newline
+\noindent \textbf{minisign} by Frank Denis is a dead simple tool to sign files and verify signatures.
 
-\textbf{minisign} by Frank Denis is a dead simple tool to sign files and verify signatures.
-
-minisign is an open source project hosted at github.
+minisign is an open source project hosted at GitHub \cite{Minisign}.
 
 \begin{lstlisting}[
     caption={minisign verify example},
@@ -260,13 +260,15 @@ minisign is an open source project hosted at github.
 $ minisign -V -p ./minisign.pub -m ./image.E01.log
 \end{lstlisting}
 
-If the investigator can read \glqq{}Signature and comment signature verified\grqq{}, he can be sure that the person with the publicly available key really created the image.
-
-\textbf{GNU Privacy Guard} (GnuPG) is a complete and free and open source implementation of the OpenPGP standard.
+\noindent If the investigator can read \glqq{}Signature and comment signature verified\grqq{}, he can be sure that the person with the publicly available key really created the image.\newline
+\newline
+\noindent \textbf{GNU Privacy Guard} (GnuPG) is a complete and free and open source implementation of the OpenPGP standard.
 
 Among other things, GnuPG allows you to sign your data.
 
 GnuPG can verify data using both embedded (.asc) and separate signature files (.sig). Both variants have been implemented.
+
+The source code of GnuPG is hosted at gnupg.org \cite{GpgGit}.
 
 \begin{lstlisting}[
     caption={gpg separate signature file verify example},
@@ -275,9 +277,9 @@ GnuPG can verify data using both embedded (.asc) and separate signature files (.
 $ gpg --verify ./image.E01.log.sig
 \end{lstlisting}
 
-If the investigator can read \glqq{}Good signature from...\grqq{}, he can be sure that the person with the publicly available key really created the image.
-
-\textbf{gpgsm} is part of the GnuPG project.
+\noindent If the investigator can read \glqq{}Good signature from...\grqq{}, he can be sure that the person with the publicly available key really created the image.\newline
+\newline
+\noindent \textbf{gpgsm} is part of the GnuPG project.
 
 gpgsm is a tool similar to gpg to provide digital encryption and signing services on X.509 certificates and the CMS protocol. It is mainly used as a backend for S/MIME mail processing. gpgsm includes a full featured certificate management and complies with all rules defined for the German Sphinx project.
 
@@ -288,9 +290,9 @@ gpgsm is a tool similar to gpg to provide digital encryption and signing service
 $ gpgsm --verify ./image.E01.log.pem
 \end{lstlisting}
 
-If the investigator can read \glqq{}Good signature from...\grqq{}, he can be sure that the person with the publicly available key really created the image.
-
-All scripts first check if the source is a log file and not the image itself and if the directory tmp is present.
+\noindent If the investigator can read \glqq{}Good signature from...\grqq{}, he can be sure that the person with the publicly available key really created the image.\newline
+\newline
+\noindent All scripts first check if the source is a log file and not the image itself and if the directory tmp is present.
 
 After that they gererate a report with the name of the log file, used signature file, used public key file, md5 and sha1 over the content of the log file.
 
@@ -302,9 +304,9 @@ At last They show the content of the report in a zenity window .
 
 The ts command of \textbf{openssl} is a basic Time Stamping Authority (TSA) client and server application as specified in RFC 3161 (Time-Stamp Protocol, TSP).
 
-OpenSSL is an open source project. The project maintains a downstream clone of his git repository on GitHub\footnote{https://github.com/openssl/openssl}.
+OpenSSL is an open source project. The project maintains a downstream clone of his git repository on GitHub \cite{OpenSSL}.
 
-In Hellonium \textbf{FreeTSA}\footnote{https://www.freetsa.org/index\_en.php} is used.
+In Hellonium \textbf{FreeTSA} \cite{FreeTSA} is used.
 
 FreeTSA trusted timestamping Software as a Service (SaaS) provides an free and easy method to apply RFC 3161 trusted timestamps to time-sensitive transactions through independently verified and auditable date and UTC (Coordinated Universal Time) sources.
 
@@ -324,7 +326,7 @@ openssl ts -verify \
 exit 0
 \end{lstlisting}
 
-The script first checks checks if the source is a log file and not the image itself and if the directory tmp is present.
+The script first checks if the source is a log file and not the image itself and if the directory tmp is present.
 
 After that it executes curl and openssl and writes the output into the log file.
 
@@ -345,7 +347,7 @@ As ewfverify the ewfinfo tool is also part of the libewf project.
 $ ewfinfo ./image.E01
 \end{lstlisting}
 
-The script first  checks if the source is an EWF\_E01 image and if the directory tmp is present.
+\noindent The script first  checks if the source is an EWF\_E01 image and if the directory tmp is present.
 
 After that it executes ewfinfo and writes the output into the log file.
 
@@ -360,7 +362,7 @@ The Sleuth Kit (TSK) by Brian Carrier is an open source forensic toolkit for ana
 
 It is the unofficial standard for examining data media or images on the command line under GNU/Linux.
 
-The open source project is hosted at GitHub\footnote{https://github.com/sleuthkit/sleuthkit}.
+The open source project is hosted at GitHub \cite{TSK}.
 
 \subsection{Partition scheme}
 
@@ -375,7 +377,7 @@ mmstat is part of the TSK project.
 $ mmstat -i ewf ./image.E01
 \end{lstlisting}
 
-Except for the tool that is called by the script, it behaves similarly to the script for ewfinfo.
+\noindent Except for the tool that is called by the script, it behaves similarly to the script for ewfinfo.
 
 The investigator should note that at the end of the workflow, he virtualises an image with an MBR with a BIOS and an image with a GTP with a UEFI.
 
@@ -392,7 +394,7 @@ mmls is also part of the TSK project.
 $ mmls -i ewf ./image.E01
 \end{lstlisting}
 
-Except for the tool that is called by the script, it behaves similarly to the script for ewfinfo.
+\noindent Except for the tool that is called by the script, it behaves similarly to the script for ewfinfo.
 
 The ID in the partition table gives a first vague indication of the file system contained in the partition.
 
@@ -417,9 +419,9 @@ To avoid confusion with the original, the author calls it sigfind-ng in the foll
 $ sigfind-ng -t fat32 ./image.E01
 \end{lstlisting}
 
-Basically, this script behaves like the others.
+\noindent Basically, this script behaves like the others.
 
-As can be seen in Fig, it also asks for the signature to be searched for.
+As can be seen in \cref{fig:sigfind-ng}, it also asks for the signature to be searched for.
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -452,7 +454,7 @@ With fsstat, the file system presumably contained in the partition should be con
 $ fsstat -i ewf -o 8192 image.E01
 \end{lstlisting}
 
-The last step is then to look with fls into the root directory of the file system.
+\noindent The last step is then to look with fls into the root directory of the file system.
 
 \begin{lstlisting}[
     caption={fls example},
@@ -461,13 +463,17 @@ The last step is then to look with fls into the root directory of the file syste
 $ fls -i ewf -o 540672 -r -p image.E01
 \end{lstlisting}
 
-Folders such as Windows or \glqq{}Program Files\grqq{} indicate a Windows installation.
+\noindent Folders such as Windows or \glqq{}Program Files\grqq{} indicate a Windows installation.
 
 Folders such as Applications, Library or System indicate a macOS installation.
 
 Folders such as lib, run or sys indicate a GNU/Linux installation.
 
-If the first partition contains a FAT32 partition with files such as bootcode.bin, kernel.img or start.elf, this indicates a Raspberry Pi OS installation.
+If the first partition contains a FAT32 partition with files such as bootcode.bin, kernel.img or start.elf, this indicates a Raspberry Pi OS installation.\newline
+\newline
+\noindent Basically, this script behaves like the others.
+
+In the main part, it iterates over all partitions and outputs information about the file systems and root directories they contain.
 
 \subsection{Write layer}
 
@@ -475,7 +481,7 @@ If the first partition contains a FAT32 partition with files such as bootcode.bi
 
 In addition, xmount also supports virtual write access to the output files that is redirected to a cache file. This makes it possible to boot acquired harddisk images using QEMU, KVM, VirtualBox, VmWare or alike.
  
-The open source project is hosted via the private git repository\footnote{https://code.pinguin.lu/diffusion/XMOUNT/} of Daniel Gillen.
+The open source project is hosted via the private git repository \cite{xmount} of Daniel Gillen.
 
 \begin{lstlisting}[
     caption={xmount example},
@@ -488,8 +494,8 @@ $ xmount --in ewf image.E?? \
          ./mountpoint/
 \end{lstlisting}
 
-As an output format for a virtual hard disk for Qemu/KVM, Hellonium uses the raw format per default.
-Since Hellonium is an individualised Arch Linux installation, the user can install Oracle VM VirtualBox\footnote{https://www.virtualbox.org/} or VMware Workstation Player\footnote{https://www.vmware.com/products/workstation-player.html}. In this case, the script also offers the output formats vdi and vmdk (see \cref{fig:xmount}).
+\noindent As an output format for a virtual hard disk for Qemu/KVM, Hellonium uses the raw format per default.
+Since Hellonium is an individualised Arch Linux installation, the user can install Oracle VM VirtualBox \cite{Virtualbox} or VMware Workstation Player \cite{VMware}. In this case, the script also offers the output formats vdi and vmdk (see \cref{fig:xmount}).
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -498,11 +504,17 @@ Since Hellonium is an individualised Arch Linux installation, the user can insta
   \label{fig:xmount}
 \end{figure}
 
+\noindent Basically, this script behaves like the others.
+
+In the main part, it mounts the forensic image using xmount with a write layer as a raw image or virtual hard disk.
+
+Finally, it generates a zenity message window with success or failure.
+
 \subsection{Recover partitions}
 
 \textbf{testdisk} by Christophe Grenier checks and recovers lost partitions.
 
-The open source project is hosted via the private git repository\footnote{https://git.cgsecurity.org/cgit/testdisk/} of Christophe Grenier.
+The open source project is hosted via the private git repository \cite{Testdisk} of Christophe Grenier.
 
 \begin{lstlisting}[
     caption={testdisk example},
@@ -511,13 +523,17 @@ The open source project is hosted via the private git repository\footnote{https:
 $ testdisk /log /debug ./mountpoint/image.dd
 \end{lstlisting}
 
-The script starts testdisk in a command line. This allows the user to operate it as usual.
+\noindent First, this script checks whether the specified file is a raw image provided by xmount.
+
+The script starts testdisk in a terminal. This allows the user to operate it as usual.
+
+At last shows the content of the log file in a zenity window.
 
 \subsection{Mount a partition}
 
 The \textbf{mount} command serves to attach the file system found on some device to the big file tree.
 
-The mount command is part of the util-linux package and the source could is hosted at kernel.org\footnote{https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/}.
+The mount command is part of the util-linux package and the source could is hosted at kernel.org \cite{UtilLinux}.
 
 \begin{lstlisting}[
     caption={mount example},
@@ -538,6 +554,12 @@ mount --options loop,rw,offset=${OFFSET}${SIZELIMIT}${EXTRAS} \
 exit 0
 \end{lstlisting}
 
+\noindent First, this script also checks whether the specified file is a raw image provided by xmount.
+
+The script asks the user for the partition to be mounted. Then the script mounts this partition per loop.
+
+Finally, it generates a zenity message window with success or failure.
+
 \subsection{Calculate hashes}
 
 To read the data, \textbf{dc3dd} is used.
@@ -545,14 +567,13 @@ To read the data, \textbf{dc3dd} is used.
 dc3dd is a forensic patch to the GNU dd program.
 dd copies a file and convert and/or formats it according to the operands.
 
-The source code is hostet at SourceForge\footnote{https://sourceforge.net/p/dc3dd/code/HEAD/tree/
-}.
-
-\textbf{tee} is used to pass the same stream of data to two instances of openssl to compute md5, as well as sha1.
+The source code is hostet at SourceForge \cite{Dc3dd}.\newline
+\newline
+\noindent \textbf{tee} is used to pass the same stream of data to two instances of openssl to compute md5, as well as sha1.
 
 tee is part of the GNU coreutils.
 
-A mirror of the git repository is available over GitHub\footnote{https://github.com/coreutils/coreutils}.
+A mirror of the git repository is available over GitHub \cite{CoreUtils}.
 
 \begin{lstlisting}[
     caption={multi hash example},
@@ -568,6 +589,12 @@ $ sed --in-place \
       ./tmp/hashes.txt
 \end{lstlisting}
 
+\noindent This script accepts all kind of files as input.
+
+In the main part, it reads the file with dd and creates two hash values at the same time.
+
+At last shows the content of the file with the hashes in a zenity window.
+
 \section{Microsoft Windows}
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
@@ -579,15 +606,15 @@ $ sed --in-place \
 
 \subsection{Find windows installation and version}
 
-\textbf{fcat}
+The Windows Registry is a very important artefact. Dealing with this and many other artefacts under Windows was part of the IMT4013-PHS module with Rune Nordvik.\newline
+\newline
+\noindent \textbf{fcat} opens the named image(s) and copies the file at the path path\_of\_file to standard output.
 
-\textbf{fcat} opens the named image(s) and copies the file at the path path\_of\_file to standard output.
+fcat is also part of TSK.\newline
+\newline
+\noindent \textbf{hivexget} by Red Hat Inc. is part of the libguestfs project and navigates through a Windows Registry binary "hive" file and extracts either all the (key, value) data pairs stored in that subkey or just the single named data item.
 
-fcat is also part of TSK.
-
-\textbf{hivexget} by Red Hat Inc. is part of the ibguestfs project and navigates through a Windows Registry binary "hive" file and extracts either all the (key, value) data pairs stored in that subkey or just the single named data item.
-
-The source code of the project is hosted at GitHub\footnote{https://github.com/libguestfs/hivex}.
+The source code of the project is hosted at GitHub \cite{Libguestfs}.
 
 \begin{lstlisting}[
     caption={hivexget example},
@@ -608,11 +635,17 @@ $ hivexget ./tmp/SOFTWARE.hive \
            'CSDVersion' >> ./tmp/winver.txt
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then iterates over all partitions and tries to extract the SOFTWARE hive. If successful, it reads out the Windows version.
+
+At last shows the result in a zenity window.
+
 \subsection{FRED}
 
 Forensic Registry EDitor (\textbf{fred}) by Daniel Gillen is a cross-platform Microsoft Windows registry hive editor.
 
-The open source project is hosted via the private git repository\footnote{https://code.pinguin.lu/diffusion/FRED/} of Daniel Gillen.
+The open source project is hosted via the private git repository \cite{FRED} of Daniel Gillen.
 
 \begin{lstlisting}[
     caption={fred example},
@@ -621,11 +654,17 @@ The open source project is hosted via the private git repository\footnote{https:
 $ fred ./tmp/SAM.hive
 \end{lstlisting}
 
-In a Microsoft Windows XP installation, System32 has to be replaced by system32 (with a lower case s).
+\noindent In a Microsoft Windows XP installation, System32 has to be replaced by system32 (with a lower case s).\newline
+\newline
+\noindent First, a script checks whether a Windows system directory has been passed and asks the user which registry hive should be opened with FRED.
+
+With another script, the user hive (NTUSER.DAT) can be passed directly.
+
+Finally, the script opens FRED with the corresponding registry hive.
 
 \subsection{BSOD}
 
-hivexregedit exports and merges Registry changes from regedit-format files.
+\textbf{hivexregedit} exports and merges Registry changes from regedit-format files.
 
 As hivexget it is part of the libguestfs project.
 
@@ -647,19 +686,25 @@ $ hivexregedit --merge \
                ./tmp/SYSTEM.tmp
 \end{lstlisting}
 
-For Windows XP, it is recommended to start with the Live System \textbf{OpenGates}.
+\noindent First, the script checks whether a Windows system directory has been passed.
+
+Then the script exports the SYSTEM hive, changes all services for accessing disks from 3 (Manual) to 0 (Boot) \cite{WindowsServiceStartMode} and merges the changes back.
+
+It informs the user via a zenity message box when the script is finished.\newline
+\newline
+\noindent For Windows XP, it is recommended to start with the Live System \textbf{OpenGates}.
 
 OpenGates is a small tool written in C that will "open" the hardware limitation "gates" of Windows installations.
 
-The source code is available at the homepage of Daniel Gillen\footnote{https://www.pinguin.lu/opengates} via an encrypted zip archive.
+The source code is available at the homepage of Daniel Gillen \cite{OpenGates} via an encrypted zip archive.
 
 \subsection{Dump NTLM}
 
-\textbf{creddump} is a python tool to extract various credentials and secrets from Windows registry hives before and after Microsoft Windows 10 Anniversary Update.
+\textbf{creddump7} is a python tool to extract various credentials and secrets from Windows registry hives before and after Microsoft Windows 10 Anniversary Update.
 
 creddump was written by Brendan Dolan-Gavitt, Ronnie Flathers has patched it and Demian Kellermann ported it to Python 3.
 
-The source code is hosted at GitHub\footnote{https://github.com/ict/creddump7}.
+The source code is hosted at GitHub \cite{Creddump}.
 
 \begin{lstlisting}[
     caption={creddump7 example},
@@ -670,11 +715,17 @@ $ pwdump.py ./tmp/SYSTEM.hive \
             > ./tmp/pwdump.txt
 \end{lstlisting}
 
+\noindent First, the script checks whether a forensic image has been specified.
+
+Then it asks the user for the partition from which the NTLM hash values are to be extracted. Then it extracts the SYSTEM and SAM registry hive and reads the NTLM hash values from them with the help of pwdump (creddump7).
+
+After the output file has been cleaned of system accounts, it is displayed in a zenity message box.
+
 \subsection{Crack NTLM}
 
-ophcrack by Objectif Securite cracks Microsoft Windows passwords (LM and NTLM hashes) with rainbow tables.
+\textbf{ophcrack} by Objectif Securite cracks Microsoft Windows passwords (LM and NTLM hashes) with rainbow tables.
 
-The source code is hosted at GitLab\footnote{https://gitlab.com/objectifsecurite/ophcrack}.
+The source code is hosted at GitLab \cite{Ophcrack}.
 
 \begin{lstlisting}[
     caption={ophcrack example},
@@ -688,13 +739,13 @@ $ ophcrack -e -g -n 8 -u \
            -o ./tmp/passwords.txt
 \end{lstlisting}
 
-hashcat by Jens Steube is the world's fastest and most advanced password recovery utility.
+\noindent \textbf{hashcat} by Jens Steube is the world's fastest and most advanced password recovery utility.
 
-The source code is hosted at GitHub\footnote{https://github.com/hashcat/hashcat}.
+The source code is hosted at GitHub \cite{Hashcat}.
 
-A dictionary attack takes less time. That is the advantage. However, not all possible character combinations are taken into account. That is the disadvantage.
-
-\textbf{rockyou.txt}\footnote{https://gitlab.com/kalilinux/packages/wordlists} serves as the dictionary.
+A dictionary attack takes less time. That is the advantage. However, not all possible character combinations are taken into account. That is the disadvantage.\newline
+\newline
+\noindent \textbf{rockyou.txt} \cite{Rockyou} serves as the dictionary.
 
 \begin{lstlisting}[
     caption={hashcat dictionary example},
@@ -712,7 +763,7 @@ $ hashcat --potfile-disable \
           --rules-file /usr/share/doc/hashcat/rules/dive.rule
 \end{lstlisting}
 
-If time is not an issue, brute force can still be an alternative. Above a certain password length, however, a brute force attack no longer makes sense, even with one or more modern graphics cards!
+\noindent If time is not an issue, brute force can still be an alternative. Above a certain password length, however, a brute force attack no longer makes sense, even with one or more modern graphics cards!
 
 \begin{lstlisting}[
     caption={hashcat brute force example},
@@ -730,18 +781,29 @@ $ hashcat --potfile-disable \
           "?a?a?a?a?a?a"
 \end{lstlisting}
 
+\noindent First, the scripts check whether a text file created via pwdump has been specified.
+
+Depending on the script, ophcrack (rainbow tables) or hashcat (brute force or dictionary attack) is then started and waited until a password is found or the tools have nothing more to do.
+
+Finally, the result file is displayed in a zenity message box.
+
 \subsection{Remove password}
 
 \textbf{chntpw} by by Petter Nordahl-Hagen is a small Microsoft Windows password removal utility.
 
-The source code is available as a zip archive on Petter Nordahl-Hagens homepage\footnote{http://pogostick.net/~pnh/ntpasswd/}.
+The source code is available as a zip archive on Petter Nordahl-Hagens homepage \cite{Chntpw}.
 
 \begin{lstlisting}[
     caption={chntpw example},
     label=lst:chntpw,
     language=bash]
-$ chntpw -i ./part2/Windows/System32/config/SOFTWARE
+$ chntpw -i ./Windows/System32/config/SOFTWARE
 \end{lstlisting}
+
+\noindent First of all, the script checks whether a Windows system 
+directory has been specified.
+
+The script starts chntpw in a terminal. This allows the user to operate it as usual.
 
 \section{ Apple macOS}
 
@@ -775,13 +837,13 @@ print( key + ":", _finditem( content, key ) )
 
 \subsection{Find macOS installation and version}
 
-\textbf{ifind}  finds  the meta-data structure that has data\_unit allocated a data unit or has a given file name.
+\textbf{ifind}  finds  the meta-data structure that has data\_unit allocated a data unit or has a given file name.\newline
+\newline
+\noindent \textbf{icat} opens the named image(s) and copies the file with the specified inode number to standard output.
 
-\textbf{icat} opens the named image(s) and copies the file with the specified inode number to standard output.
-
-ifind and icat are part of TSK.
-
-In an HFS+ file system, you can work directly with an offset. In an APFS file system, the block of the APFS container must be determined beforehand via pstat and then additionally specified with the -B option.
+ifind and icat are part of TSK.\newline
+\newline
+\noindent In an HFS+ file system, you can work directly with an offset. In an APFS file system, the block of the APFS container must be determined beforehand via pstat and then additionally specified with the \glqq{}-B\grqq{} option.
 
 \begin{lstlisting}[
     caption={Get macOS version},
@@ -804,13 +866,19 @@ $ print_plist_entry.py ./tmp/SystemVersion.plist ProductBuildVersion \
                        >> ./tmp/macver.txt
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then iterates over all partitions and tries to extract the SystemVersion.plist. If successful, it reads out the macOS version.
+
+At last shows the result in a zenity window.
+
 \subsection{Timezone}
 
 Depending on the macOS version, there were and/or are different places in the file system where you can find information about the timezone. The simplest is the target pointed to by the symbolic link /private/etc/localtime.
 
-The Nautilus script considers several possibilities.
-
-\textbf{istat} displays the uid, gid, mode, size, link number, modified, accessed, changed times, and all the disk units a structure has allocated.
+The Nautilus script considers several possibilities.\newline
+\newline
+\noindent \textbf{istat} displays the uid, gid, mode, size, link number, modified, accessed, changed times, and all the disk units a structure has allocated.
 
 istat is part of TSK.
 
@@ -828,17 +896,23 @@ $ istat -o 409640 \
         | grep --extended-regexp "Symbolic.*zoneinfo"
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then asks the user for a partition and tries to extract the timezone from /private/etc/localtime (symbolic link), /Library/Preferences.plist for /Library/Preferences/.GlobalPreferences.plist. If successful, it reads out the timezone information.
+
+At last shows the result in a zenity window.
+
 \subsection{Password hints}
 
 User data is located in a different APFS container than the system data.
 
 The password hint can be pulled from the user's plist with print\_plist\_entry.py.
 
-If autologin is activated, the obfuscated password can be defused with kcpass.py by Joaquin Moreno Garijo from /private/etc/kcpassword.
+If autologin is activated, the obfuscated password can be defused with \textbf{kcpass.py} by Joaquin Moreno Garijo from /private/etc/kcpassword.
 
 The author has ported the code to python 3.
 
-The source code is hosted at GitHub\footnote{https://github.com/casualscripter/mac-osx-forensics/blob/master/kcpass.py}.
+The source code is hosted at GitHub \cite{Kcpass}.
 
 \begin{lstlisting}[
     caption={defuscate kcpassword},
@@ -852,15 +926,21 @@ $ icat -o 409640
 $ kcpass.py "$( xxd -p ./tmp/kcpassword )"
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then asks the user for a partition and tries to extract the plists for real users in the Open Directory and a /private/etc/kcpassword file. After that it extracts the password hints with print\_plist\_entry.py from the user plists and tries to defuscate the kcpassword file with kcpass.py.
+
+At last shows the result in a zenity message box.
+
 \subsection{Dump hash}
 
 The knowledge of how to extract the hash values from different macOS versions is taught by Kurt Helge Hansen in the module IMT4504-PHS.
 
-The learning material is not publicly available.
-
-The \textbf{salted SHA1} hash of a macOS installations up to version 10.6 aka Snow Leopard is stored at a specific position of a file.
-
-\textbf{cut} prints selected parts of lines from each FILE to standard output.
+The learning material is not publicly available.\newline
+\newline
+\noindent The \textbf{salted SHA1} hash of a macOS installations up to version 10.6 aka Snow Leopard is stored at a specific position of a file.\newline
+\newline
+\noindent \textbf{cut} prints selected parts of lines from each FILE to standard output.
 
 cut is also part of the GNU coreutils.
 
@@ -874,35 +954,37 @@ fcat -o 409640 \
      | cut --characters=169-216
 \end{lstlisting}
 
-Dumping the \textbf{salted SHA512} hash of a macOS installation in version 10.7 aka Lion is a bit more difficult.
-
-plistutil allows to convert a file in Property List format from binary to XML format or vice-versa.
+\noindent Dumping the \textbf{salted SHA512} hash of a macOS installation in version 10.7 aka Lion is a bit more difficult.\newline
+\newline
+\noindent \textbf{plistutil} allows to convert a file in Property List format from binary to XML format or vice-versa.
 
 plistutil is part of the libmobiledevice project.
 
-The source code is hosted at GitHub\footnote{https://github.com/libimobiledevice/libplist}.
-
-sed is a stream editor that is used to perform basic text transformations on an input stream.
+The source code is hosted at GitHub \cite{Libplist}.\newline
+\newline
+\noindent \textbf{sed} is a stream editor that is used to perform basic text transformations on an input stream.
 
 sed is part of the GNU project.
 
-the source code is hosted... https://git.savannah.gnu.org/gitweb/?p=sed.git
+the source code is hosted at Savannah \cite{Sed}.\newline
+\newline
+\noindent \textbf{grep} searches for patterns in each file.
 
-grep searches for patterns in each file.
+grep is also part of the GNU project.\newline
+\newline
+\noindent \textbf{tr} translates, squeezes, and/or deletes characters from standard input, writing to standard output.
 
-grep is also part of the GNU project.
+tr is part of coreutils of the GNU project.\newline
+\newline
+\noindent \textbf{base64} encode or decode file, or standard input, to standard output.
 
-tr translates, squeezes, and/or deletes characters from standard input, writing to standard output.
+base64 is part of coreutils of the GNU project.\newline
+\newline
+\noindent \textbf{xxd} reads a hex dump of a given file or standard input.
 
-tr is part of coreutils of the GNU project.
+xxd is part of the vim project.
 
-base64 encode or decode file, or standard input, to standard output.
-
-base64 is part of coreutils of the GNU project.
-
-xxd reates a hex dump of a given file or standard input.
-
-https://github.com/vim/vim
+vim is hosted at GitHub \cite{Xxd}.
 
 \begin{lstlisting}[
     caption={extract hash 10.7},
@@ -924,13 +1006,13 @@ $ plistutil --infile ./tmp/shadowhashdata.plist \
   | tr --delete '\n'
 \end{lstlisting}
 
-Dumping a Password-Based Key Derivation Function 2 (\textbf{PBKDF2}) derived \textbf{salted SHA512} hash of a macOS installation since version 10.8 aka Mointain Lion is the biggest challenge.
+\noindent Dumping a Password-Based Key Derivation Function 2 (\textbf{PBKDF2}) derived \textbf{salted SHA512} hash of a macOS installation since version 10.8 aka Mointain Lion is the biggest challenge.\newline
+\newline
+\noindent \textbf{tail} print the last n lines of each file to standard output.
 
-\textbf{tail} print the last n lines of each file to standard output.
-
-tail is also part of the GNU coreutils.
-
-\textbf{echo} echos the string(s) to standard output.
+tail is also part of the GNU coreutils.\newline
+\newline
+\noindent \textbf{echo} echos the string(s) to standard output.
 
 echo is also part of the GNU coreutils.
 
@@ -973,19 +1055,27 @@ $ ENTROPY="$( plistutil --infile ./tmp/shadowhashdata.plist \
 $ echo "\$ml\$${ITERATION}\$${SALT}\$${ENTROPY}"
 \end{lstlisting}
 
+\noindent The scripts first checks if the source is an image and and if the directory tmp is present.
+
+They then ask the user for a partition and try to extract the hashes from a file under /private/var/db/shadow/hash (until 10.6) or from a users plist (since 10.7) with a little bit of comannd line kung fu.
+
+At last they show the result in a zenity message box.
+
 \subsection{Crack hash}
 
-Given the complexity of the hash values, brute force hardly makes sense for reasons of time and is therefore neglected.
+Because the hashes are salted, rainbow tables are not useful.
 
-The call of Hashcat is comparable to the one for cracking NTLM (see \cref{lst:hashcat-dict}) hash values. Only the hash types are different. The hash type for salted SHA1 is 122, that for salted SHA512 is 1722 and that for salted SHA512 PBKDF2 is 7100.
+Given the complexity of the hash values, brute force hardly makes sense for reasons of time and is therefore skipped.
+
+The call of Hashcat is comparable to the one for cracking NTLM (see \cref{lst:hashcat-dict}) hash values. Only the hash types are different. The hash type for salted SHA1 is \textbf{122}, that for salted SHA512 is \textbf{1722} and that for salted SHA512 PBKDF2 is \textbf{7100}.
 
 For the last one, a short dictionary is recommended, as the duration quickly goes into years.
 
 \subsection{Redo setup}
 
-On macOS installations that were installed in an HFS+, the partition can be mounted regularly. By deleting the file /private/var/db/.AppleSetupDone, the setup can be gone through again as already directly after the installation. A new user with administrative rights (comparable to root) is created.
+On macOS installations that were installed in an HFS+, the partition can be mounted regularly under GNU/Linux. By deleting the file /private/var/db/.AppleSetupDone, the setup can be gone through again as already directly after the installation. A new user with administrative rights (comparable to root) is created.
 
-On macOS installations that were installed in APFS, this is unfortunately not possible due to the lack of write support for APFS. In this case, the file must be deleted either in recovery mode or after booting macOS from an external devise.
+On macOS installations that were installed in APFS, this is unfortunately not possible due to the lack of write support for APFS. In this case, the file has to be deleted either in recovery mode or after booting macOS from an external devise.
 
 \section{GNU/Linux}
 
@@ -1018,19 +1108,19 @@ mageia-release and
 lsb-release
 in /etc.
 
-If several data are found, the user must interpret the result manually.
+If several files are found, the user has to interpret the result manually.
 
 \subsection{RPi CPU version}
 
 \textbf{zgrep} invokes grep on compressed or gzipped files.
 
-zgrep is part of the GNU gzip project and hostet at Savannah\footnote{https://git.savannah.gnu.org/gitweb/?p=gzip.git}.
+zgrep is part of the GNU gzip project and hostet at Savannah \cite{Gzip}.\newline
+\newline
+\noindent \textbf{gawk} is the GNU Project's implementation of the awk pattern scanning and processing language.
 
-\textbf{gawk} is the GNU Project's implementation of the awk pattern scanning and processing language.
-
-gawk is also part of the GNU project and hosted at Savannah\footnote{https://git.savannah.gnu.org/gitweb/?p=gawk.git}.
-
-\textbf{sort} writes sorted concatenation of all file(s) to standard output.
+gawk is also part of the GNU project and hosted at Savannah \cite{Gawk}.\newline
+\newline
+\noindent \textbf{sort} writes sorted concatenation of all file(s) to standard output.
 
 sort is also part of the GNU coreutils project.
 
@@ -1043,19 +1133,25 @@ $ zgrep --fixed-strings "CPU:" .tmp/kern.log \
   | sort --unique
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then searches the contents of /var/log/kern.log for CPU + Processor in the Linux partition of the Raspberry Pi OS installation.
+
+At last shows the result in a zenity window.
+
 \subsection{RPi kernel version}
 
-binwalk by Craig Heffner is a fast, easy to use tool for analyzing, reverse engineering, and extracting firmware images.
+\textbf{binwalk} by Craig Heffner is a fast, easy to use tool for analyzing, reverse engineering, and extracting firmware images.
 
-The source code is hosted at GitHub\footnote{https://github.com/ReFirmLabs/binwalk}.
+The source code is hosted at GitHub \cite{Binwalk}.\newline
+\newline
+\noindent \textbf{zcat} uncompresses either a list of files on the command line or its standard input and writes the uncompressed data on standard output.
 
-zcat uncompresses either a list of files on the command line or its standard input and writes the uncompressed data on standard output.
+zcat is also part of the GNU gzip project.\newline
+\newline
+\noindent \textbf{strings} prints per default the printable character sequences that are at least 4 characters long and are followed by an unprintable character.
 
-zcat is also part of the GNU gzip project.
-
-strings prints per default the printable character sequences that are at least 4 characters long and are followed by an unprintable character.
-
-strings is part of the GNU binutils project hosted at Sourceware\footnote{https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git}.
+strings is part of the GNU binutils project hosted at Sourceware \cite{Binutils}.
 
 \begin{lstlisting}[
     caption={identify RPi kernel version},
@@ -1069,13 +1165,25 @@ $ dd if=./tmp/kernel.img bs=1 skip="${SKIP}" status=none \
     | grep -F "Linux version"
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then extracts the kernel image from the FAT32 partition of a Raspberry Pi OS, decompresses it and searches for \glqq{}Linux version\grqq{} in the human readable part of the content.
+
+At last shows the result in a zenity message box.
+
 \subsection{Timezone}
 
 GNU/Linux has also adopted different ways of remembering the time zone over time. There are also differences among the distributions.
 
-If you have luck, the time zone is directly in /etc/localtime as plain text.
+If you have luck, the time zone is directly in /etc/timezone as plain text.
+
+If not you have to interpret the symbolic link of /etc/localtime or find the origial of the file under /usr/ahre/zoneinfo.
+
+The Nautilus script tries all variants.
 
 \subsection{Dump hash}
+
+Dumping the hashes of a GNU/Linux system is straight forward.
 
 \begin{lstlisting}[
     caption={dump SHA512crypt hashes},
@@ -1084,21 +1192,29 @@ If you have luck, the time zone is directly in /etc/localtime as plain text.
 $ awk -F ":" '$2 ~ /.{3,}/ { print $2; }' ./tmp/shadow
 \end{lstlisting}
 
+\noindent The script first checks if the source is an image and and if the directory tmp is present.
+
+It then asks the user for a partition and tries to extract the hashes from /etc/shadow.
+
+At last shows the result in a zenity message box.
+
 \subsection{Crack hash}
 
-hashcat + dictionory
+Because the hashes are salted, rainbow tables are not useful.
 
-Hash type for SHA512-crypt: 1800
+Given the complexity of the hash values, brute force hardly makes sense for reasons of time and is therefore skipped.
+
+The call of Hashcat is comparable to the one for cracking NTLM (see \cref{lst:hashcat-dict}) hash values. Only the hash types are different. The hash type for salted SHA512 is \textbf{1800}.
 
 As the latest macOS it needs a year or longer. Only recommended with a short dictionary.
 
 \subsection{Change password}
 
-The passwd command changes passwords for user accounts.
+The \textbf{passwd} command changes passwords for user accounts.
 
 passwd is part of the shadow project.
 
-It is hosted at GitHub\footnote{https://github.com/shadow-maint/shadow}.
+It is hosted at GitHub \cite{Shadow}.
 
 \begin{lstlisting}[
     caption={Change GNU/Linux password},
@@ -1107,6 +1223,12 @@ It is hosted at GitHub\footnote{https://github.com/shadow-maint/shadow}.
 $ passwd --root ./part2/ user
 \end{lstlisting}
 
+\noindent First, the Nautilus script checks whether a path has been specified. If not, a password would be changed in its own system. This should be avoided.
+
+Then it checks whether the path has been made available by xmount with a write layer and mount with loop to prevent changes to an image.
+
+After that, passwd is called in a terminal window and can be operated as usual.
+
 \section{Virtualization}
 
 QEMU is a generic and open source machine \& userspace emulator and
@@ -1114,7 +1236,7 @@ virtualizer.
 
 The author prefers QEMU to VMware Workstation Player/Pro because it is open source.
 
-Many people are involved in the open source project, which is hosted on  GitLab\footnote{https://gitlab.com/qemu-project/qemu}.
+Many people are involved in the open source project, which is hosted on  GitLab \cite{Qemu}.
 
 The author prefers QEMU to Oracle VM VirtualBox because it can be completely controlled from the command line. This makes integration into his Nautilus scripts easier. Furthermore, VirtualBox cannot emulate ARM architecture.
 
@@ -1122,21 +1244,11 @@ The author prefers QEMU to Oracle VM VirtualBox because it can be completely con
 
 QEMU uses the PC BIOS from the Seabios project per default.
 
--enable-kvm: enables the kernel based virtual machine (KVM) full virtualization support if available.
+As you can see in \cref{lst:bios} the option \glqq{}-enable-kvm\grqq{} enables the kernel based virtual machine (KVM) full virtualization support if available.
 
-Pass thrugh the CPU of the host with only one thread and only one core to support older Microsoft Windows XP installations.
+The VM is configured to pass through the CPU of the host with only one thread and only one core to support older Microsoft Windows XP installations, with 3GB of RAM, with an usb-tablet as a pointer, with QXL paravirtual graphic card including VESA 2.0 VBE support (the drivers can be downloaded from the SPICE project page \cite{Spice}), with a rtl8139 network interface (it is an older, slower but good supported network card on older operating systems) with restricted access to the network and the image as a DASD.
 
-3GB of RAM.
-
-usb-tablet as a pointer.
-
-QXL paravirtual graphic card including VESA 2.0 VBE support. The drivers can be downloaded from the SPICE project page\footnote{https://www.spice-space.org/download.html}.
-
-rtl8139 is an older, slower but good supported network card on older operating systems. Restricting the access is always a good idea.
-
-the VM can be controlled with -monitor stdio in the console after startup.
-
--drive defines a new DASD at a controller.
+The VM can be controlled with the option \glqq{}-monitor stdio\grqq{}  in the console after startup.
 
 \begin{lstlisting}[
     caption={Quemu BIOS},
@@ -1155,7 +1267,7 @@ $ qemu-system-x86_64 \
   -drive file="./mountpoint/image.dd",index=0,media=disk,format=raw
 \end{lstlisting}
 
-Today it is the easiest way to virtualize a Microsoft Windows installation in Bootcamp.
+\noindent Today it is the easiest way to virtualize a Microsoft Windows installation in Bootcamp.
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -1164,13 +1276,19 @@ Today it is the easiest way to virtualize a Microsoft Windows installation in Bo
   \label{fig:bios}
 \end{figure}
 
+\noindent First, the Nautilus script checks whether a raw image has been given. This must have been created by xmount with a write layer and no partition should be mounted from it.
+
+Then the image is passed to the call of qemu (see \cref{lst:bios}. If all the previous steps have been done in the right order and interpreted correctly, the result should look like in \cref{fig:bios}.
+
 \subsection{(U)EFI}
 
 OVMF is an EDK II based project to enable UEFI support for Virtual Machines.
 
-The open source project is hosted at GitHub\footnote{https://github.com/tianocore/edk2/tree/master/OvmfPkg}.
+The open source project is hosted at GitHub \cite{Ovmf}.
 
 The other options are for fine tuning the powersaving mode and the virtual graphic card.
+
+An example of the command line changes from the previous scripts can be seen in \cref{lst:uefi}.
 
 \begin{lstlisting}[
     caption={Quemu UEFI},
@@ -1183,7 +1301,7 @@ The other options are for fine tuning the powersaving mode and the virtual graph
 [...]
 \end{lstlisting}
 
-This configuration is optimal for Microsoft Windows 10.
+\noindent This configuration is optimal for Microsoft Windows 10 like in \cref{fig:uefi}.
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -1195,6 +1313,8 @@ This configuration is optimal for Microsoft Windows 10.
 \subsection{Network}
 
 If the older rtl8139 network card is to old an there are no driveres available anymore, the e1000-82540em will be the better solution on newer systems.
+
+An example of the command line changes from the previous scripts can be seen in \cref{lst:e1000}.
 
 \begin{lstlisting}[
     caption={Quemu new network interface (UEFI)},
@@ -1212,6 +1332,8 @@ The controller is a chip or a set of chips that physically controls the device (
 If another interface for the drive is needed it can be easily changed.
 
 QEMU is able to provide ide, scsi, sd, mtd, floppy, pflash, virtio or none as an interface.
+
+An example of the command line changes from the previous scripts can be seen in \cref{lst:nvme}.
 
 \begin{lstlisting}[
     caption={Quemu NVMe controller},
@@ -1231,6 +1353,8 @@ The easiest way to insert a virtual CD/DVD is to use the \glqq{}-cdrom\grqq{} op
 
 The Nautilus script asks the user for an ISO image.
 
+In the \cref{fig:cdrom} you can see the started Live GNU/Linux system \glqq{}grml\grqq{}.
+
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
   \includegraphics[width=.75\textwidth]{figures/boot-cdrom-grml.png}
@@ -1240,7 +1364,7 @@ The Nautilus script asks the user for an ISO image.
 
 \subsection{Drivers and tools}
 
-A prebuild ISO image with drivers (eg.  QXL drivers) and useful tools is included in Hellonium.
+A prebuild ISO image with drivers (eg.  QXL drivers) and useful tools (Windows Sysinternals \cite{Sysinternals}, NirSoft \cite{Nirsoft}, BusyBox \cite{Busybox}, Dropbear \cite{Dropbear}, rsync \cite{Rsync}, Find Any File \cite{FindAnyFile}, ...) is included in Hellonium.
 
 There is also a script in Hellonium to update the prebuild ISO if needed.
 
@@ -1257,6 +1381,8 @@ $ mkisofs -lJR \
 
 If multiple cpus with multiple threads and multiple cores are needed this is possible too.
 
+An example of the command line changes from the previous scripts can be seen in \cref{lst:smp}.
+
 \begin{lstlisting}[
     caption={Quemu Symmetric multiprocessing},
     label=lst:smp,
@@ -1271,9 +1397,9 @@ readonly CPU_THREADS="4"
 
 \subsection{macOS up to 10.8}
 
-Especially for the big cats of the macOS operating systems there more fine tuning needed.
+Especially for the big cats of the macOS operating systems there more fine tuning needed (see \cref{lst:cats}.
 
-The GitHub\footnote{https://github.com/kholia/OSX-KVM} repository of Dhiru Kholia is a good starting point for that.
+The GitHub repository of Dhiru Kholia \cite{OSXKVM}is a good starting point for that.
 
 For more details, please refer to the QEMU manual page and the GitHub repository mentioned above.
 
@@ -1300,6 +1426,8 @@ $ qemu-system-x86_64 \
   device ide-hd,bus=ahci0.0,drive=Macintosh_HD,id=sata-disk0
 \end{lstlisting}
 
+\noindent A successful start with login of Snow Leopard can be seen in \cref{fig:cats}.
+
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
   \includegraphics[width=.75\textwidth]{figures/boot-macos-snow-leopard.png}
@@ -1309,7 +1437,7 @@ $ qemu-system-x86_64 \
 
 \subsection{macOS up from 10.9}
 
-With each new macOS version, the configuration becomes more complicated. For the macOS versions with locations in their names, the following configuration has proven itself so far.
+With each new macOS version, the configuration becomes more complicated. For the macOS versions with locations in their names, the configuration from \cref{lst:locations} has proven itself so far.
 
 Here, reference is also made to the GitHub repository of Dhiru Kholia.
 
@@ -1342,6 +1470,8 @@ $ qemu-system-x86_64 \
   -monitor stdio
 \end{lstlisting}
 
+\noindent A successful start with login of Catalina can be seen in \cref{fig:locations}.
+
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
   \includegraphics[width=.75\textwidth]{figures/boot-macos-catalina.png}
@@ -1350,6 +1480,16 @@ $ qemu-system-x86_64 \
 \end{figure}
 
 \subsection{RPi with cli}
+
+A Raspberry Pi OS can be emulated by specifying the machine \glqq{}virt\grqq{} \cite{QemuARM}.
+
+However, this requires a suitable Linux kernel with virtio support.
+
+For this purpose Hellonium contains a selection of prebuild Linux kernels with virtio support.
+
+If a kernel is missing in the future, the script (see \cref{app:scripts}) only needs to be adapted accordingly.
+
+The complete command line call can be taken from \cref{lst:cli}.
 
 \begin{lstlisting}[
     caption={Quemu RPi CLI},
@@ -1373,6 +1513,8 @@ $ qemu-system-arm \
   -no-reboot
 \end{lstlisting}
 
+\noindent A successful start of a Raspberry Pi OS with an external virto kernel can be seen in \cref{fig:cli}.
+
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
   \includegraphics[width=.5\textwidth]{figures/boot-rpi-with-cli-only.png}
@@ -1381,6 +1523,16 @@ $ qemu-system-arm \
 \end{figure}
 
 \subsection{RPi with GUI}
+
+If the original system was used with a graphical interface, another machine has to be used for emulation.
+
+The \glqq{}versatilepb\grqq{} machine was/is quite useful for this.
+
+Unfortunately, the memory is limited to 256MB. Currently, Raspberry Pis with up to 8GB of memory are available. That could become a problem in the future.
+
+However, you also need an appropriate kernel for this. The kernels from Dhruv Vyas' GitHub repository \cite{Versatilepb} basically fulfil this purpose.
+
+The complete command line call can be taken from \cref{lst:gui}.
 
 \begin{lstlisting}[
     caption={Quemu RPi GUI},
@@ -1399,6 +1551,8 @@ $ qemu-system-arm \
   -append 'root=/dev/vda2 panic=1' \
   -no-reboot
 \end{lstlisting}
+
+\noindent A successful start of a Raspberry Pi OS and login with the alternative hardware empulation can be seen in \cref{fig:gui}.
 
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
@@ -1423,6 +1577,8 @@ The Nautilus scripts for virtualize or emulate an image are asking if the user w
 
 qemu-img is part of the QEMU project.
 
+An example command line call can be seen in \cref{lst:qemu-img}.
+
 \begin{lstlisting}[
     caption={Quemu-img convert},
     label=lst:qemu-img,
@@ -1433,7 +1589,7 @@ $ qemu-img convert -p -f raw -O qcow2 -c ./mountpoint/image.dd ./image.qcow2
 \subsection{Live system}
 
 In rare cases, especially if the image was created from a defective hard disk drive, an export with tools on the host itself like qemu-img or dc3dd was not possible.
-In this case, booting with a live Linux, such as \textbf{Sumuri PALADIN}\footnote{https://sumuri.com/software/paladin/}, and passing the target medium often helped. Sumuri can create a virtual machine disk (VMDK) directly.
+In this case, booting with a live GNU/Linux, such as \textbf{Sumuri PALADIN} \cite{Paladin}, and pass through the target medium often helped. Sumuri can create a virtual machine disk (VMDK) directly.
 
 \section{Garbage collection}
 
@@ -1441,11 +1597,13 @@ In this case, booting with a live Linux, such as \textbf{Sumuri PALADIN}\footnot
 
 It is like sudo on the command line and the successor of gksu.
 
-pkexec is part of the polkit project and hosted at freedesktop.org\footnote{https://gitlab.freedesktop.org/polkit/polkit}.
-
-The \textbf{umount} command detaches the mentioned filesystem(s) from the file hierarchy.
+pkexec is part of the polkit project and hosted at freedesktop.org \cite{Polkit}.\newline
+\newline
+\noindent The \textbf{umount} command detaches the mentioned filesystem(s) from the file hierarchy.
 
 Like mount, umount is part of the util-linux package.
+
+An example command line call can be seen in \cref{lst:umount}.
 
 \begin{lstlisting}[
     caption={u(n)mount as root},

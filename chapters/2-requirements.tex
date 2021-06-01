@@ -7,7 +7,7 @@ The evaluation of an extensive internet search for the combination of \glqq{}for
 
 However, several hits pointed to proprietary solutions.
 
-The author had access to Forensic Explorer (FEX)\footnote{https://getdataforensics.com/product/forensic-explorer-fex/} including Mount Image Pro from GetData, Carbon - Virtual Forensic Suite (VFS)\footnote{https://sumuri.com/software/carbon/} from Sumuri as well as Arsenal Image Mounter (AIM)\footnote{https://arsenalrecon.com/products/} with activated „professional mode“ from Arsenal Recon at the beginning of writing this master thesis.
+The author had access to Forensic Explorer (FEX) \cite{FEX} including Mount Image Pro from GetData, Carbon - Virtual Forensic Suite (VFS) \cite{Carbon} from Sumuri as well as Arsenal Image Mounter (AIM) \cite{AIM} with activated „professional mode“ from Arsenal Recon at the beginning of writing this master thesis.
 
 The discussions with the seminar participants as well as a closer look at the proprietary solutions helped shape the requirements.
 
@@ -19,7 +19,7 @@ The name of the result of this Master's thesis is „Hellonium“. For reasons o
 \begin{figure}[htbp]  % order of priority: h here, t top, b bottom, p page
   \centering
   \includegraphics[width=.5\textwidth]{figures/device-to-image.png}
-  \caption[Focus on EWF\_E01]{The default imaged format is EWF\_E01.}
+  \caption[Focus on EWF\_E01]{The default image format is EWF\_E01.}
   \label{fig:ewfe01}
 \end{figure}
 
@@ -55,7 +55,7 @@ Following current, widely used forensic software, at least the hash variants MD5
 
 To prevent an unauthorised person from manipulating the evidence unnoticed and subsequently creating a new forensic image including new hash values, Hellonium has to be able to verify digital signatures. \cite{Nikkel2016:154}
 
-Signify\footnote{https://www.openbsd.org/papers/bsdcan-signify.html}, minisign\footnote{https://jedisct1.github.io/minisign/}, GnuPG\footnote{https://www.gnupg.org/gph/en/manual/x215.html} and s/mime\footnote{https://tools.ietf.org/html/rfc8551} are widely used. At least one system has to be supported.
+Signify \cite{Signify}, minisign \cite{Minisign}, GnuPG \cite{GnuPG} and s/mime \cite{SMIME} are widely used. At least one system has to be supported.
 
 \subsection{RFC-3161 Timestamping}
 
@@ -87,7 +87,7 @@ During the creation of a partition, an ID (MBR) or a GUID (GPT) is specified, wh
 
 The green marked ID (07) in \cref{fig:NTFSMBR} indicates that the partition is to be formatted with an NTFS file system.
 
-Since the type of partitioning of the data carrier, based on the entries in the partition table, can already provide the first clues about operating systems that may be contained, Hellonium has to be able to correctly interpret the structure of data carriers with a Master Boot Record (MBR) as well as a Globally Unique Identifier Partition Table (GPT).
+Since the type of partitioning of the DASD, based on the entries in the partition table, can already provide the first clues about operating systems that may be contained, Hellonium has to be able to correctly interpret the structure of data carriers with a Master Boot Record (MBR) as well as a Globally Unique Identifier Partition Table (GPT).
 
 On Apple Macintosh devices with Bootcamp, a hybrid MBR can lead to confusion in this context. \cite{HybridMBR}
 
@@ -150,7 +150,7 @@ Every secured computer system must require all users to be authenticated at logi
 
 In modern operating systems, passwords are not stored in plain text. They are converted to so-called hash values using mathematical one-way functions before they are stored.
 
-Hellonium should offer several ways to find or calculate passwords from hints or hash values.
+Hellonium should offer several ways to find or calculate passwords from hints or against hash values.
 
 \subsection{Microsoft Windows}
 
